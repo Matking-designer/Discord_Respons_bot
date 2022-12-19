@@ -4,21 +4,21 @@ from datetime import datetime, date
 
 class DataSync:
 
-    def Open(self,File:str = "") -> dict:
+    def Open(self,File:str|None = None) -> dict:
 
-        if File != "":
+        if not File is None:
 
             self.File=File
 
         with open(self.File,'r',encoding='UTF8') as f:
 
-            self.Data:dict = json.loads(f.read())
+            json.load(f,self.Data)
 
         return self.Data
 
-    def Close(self,Data:dict,File:str = "") -> None:
+    def Close(self,Data:dict,File:str|None = None) -> None:
 
-        if File != "":
+        if not File is None:
 
             self.File=File
 
@@ -26,7 +26,7 @@ class DataSync:
 
         with open(self.File,"w",encoding="UTF8") as f:
 
-            f.write(json.dumps(self.Data,indent=4))
+            json.dump(self.Data,f,indent=4)
 
 class OprateDate:
 
