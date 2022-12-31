@@ -14,7 +14,7 @@ class DataSync:
 
         with open(self.File,'r',encoding='UTF8') as f:
 
-            json.load(f,self.Data)
+            self.Data = json.load(f.read())
 
         return self.Data
 
